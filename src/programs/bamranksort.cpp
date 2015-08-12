@@ -39,6 +39,7 @@ static int getDefaultVerbose() {return 0;}
 static int getDefaultLevel() {return Z_DEFAULT_COMPRESSION;}
 static int getDefaultMaxMisordered() {return 500000;}
 static int getDefaultExpectedStep() {return 2;}
+static std::string getDefaultInputFormat() {return "bam";}
 
 #include <libmaus2/lz/BgzfDeflateOutputCallbackMD5.hpp>
 
@@ -395,6 +396,8 @@ int main(int argc, char* argv[]) {
 		V.push_back(std::pair<std::string,std::string> ("misordered=<["+::biobambam2::Licensing::formatNumber(getDefaultMaxMisordered())+"]>", "number of read pairs (including secondary/supplementary alignments) allowed to accumulate before exiting"));
 		V.push_back(std::pair<std::string,std::string> ("step=<["+::biobambam2::Licensing::formatNumber(getDefaultExpectedStep())+"]>", "the increment expected between one rank and the next"));
 		V.push_back(std::pair<std::string,std::string> ("outputthreads=<1>", "output helper threads (for outputformat=bam only, default: 1)"));
+		V.push_back(std::pair<std::string,std::string> ("inputformat=<[" + getDefaultInputFormat() + "]>", "input format (" + libmaus2::bambam::BamMultiAlignmentDecoderFactory::getValidInputFormats() + ")"));
+		V.push_back(std::pair<std::string,std::string> ("outputformat=<[" + libmaus2::bambam::BamBlockWriterBaseFactory::getDefaultOutputFormat() + "]>", "output format (" + libmaus2::bambam::BamBlockWriterBaseFactory::getValidOutputFormats() + ")"));
 
     	    	::biobambam2::Licensing::printMap(std::cerr,V);
 		
